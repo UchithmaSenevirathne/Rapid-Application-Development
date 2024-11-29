@@ -1,7 +1,9 @@
-export default function ButtonComponent(props:{name: string}) {
+import {ReactNode} from "react";
+
+export default function ButtonComponent(props:{children: ReactNode}) {
     return (
         <>
-            <button>{props.name}</button>
+            <button>{props.children}</button>
         </>
     )
 }

@@ -1,25 +1,15 @@
 import './App.css'
-import {Dashboard} from "./component/Dashboard.tsx";
-import {Login} from "./component/Login.tsx";
-// import ButtonComponent from "./component/ButtonComponent.tsx";
+// import {Dashboard} from "./component/Dashboard.tsx";
+// import {Login} from "./component/Login.tsx";
+import ButtonComponent from "./component/ButtonComponent.tsx";
 // import {Item} from "./component/Item.tsx";
 // import {ItemList} from "./Items.ts";
 
 function App() {
 
-    const isLogin = false;
-
-    let content;
-
-    if (isLogin) {
-        content = <Dashboard />;
-    }else {
-        content = <Login />;
-    }
-
   return (
     <>
-        {content}
+        <ButtonComponent>Click Me</ButtonComponent>
     </>
   )
 }
@@ -56,3 +46,17 @@ export default App
 // }
 
 {/*{itemArray}*/}
+
+// ===============================
+//
+// const isLogin = false;
+//
+// let content;
+//
+// if (isLogin) {
+//     content = <Dashboard />;
+// }else {
+//     content = <Login />;
+// }
+
+// {content}
