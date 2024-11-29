@@ -1,22 +1,25 @@
 import './App.css'
+import {Dashboard} from "./component/Dashboard.tsx";
+import {Login} from "./component/Login.tsx";
 // import ButtonComponent from "./component/ButtonComponent.tsx";
-import {Item} from "./component/Item.tsx";
-import {ItemList} from "./Items.ts";
+// import {Item} from "./component/Item.tsx";
+// import {ItemList} from "./Items.ts";
 
 function App() {
 
-    // =======04==============
-    const itemArray = [];
+    const isLogin = false;
 
-    for (const item of ItemList) {
-        itemArray.push(<Item title={item.title} description={item.description} />);
+    let content;
+
+    if (isLogin) {
+        content = <Dashboard />;
+    }else {
+        content = <Login />;
     }
 
   return (
     <>
-        {/*=========04===========*/}
-        {itemArray}
-
+        {content}
     </>
   )
 }
@@ -44,3 +47,12 @@ export default App
 {/*{ItemList.map((item) => (*/}
 {/*    <Item title={item.title} description={item.description} />*/}
 {/*))}*/}
+
+// =======04==============
+// const itemArray = [];
+//
+// for (const item of ItemList) {
+//     itemArray.push(<Item title={item.title} description={item.description} />);
+// }
+
+{/*{itemArray}*/}
