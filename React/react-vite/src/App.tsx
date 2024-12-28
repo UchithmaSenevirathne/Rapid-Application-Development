@@ -1,82 +1,46 @@
 import './App.css'
+import {createBrowserRouter, RouterProvider} from "react-router";
 // import {Subject} from "./component/Subject.tsx";
-// import {Dashboard} from "./component/Dashboard.tsx";
+import {Dashboard} from "./pages/Dashboard.tsx";
+import {Add} from "./pages/Add.tsx";
+import {Error} from "./pages/Error.tsx";
+import {Update} from "./pages/Update.tsx";
+import {Delete} from "./pages/Delete.tsx";
+import {RootLayout} from "./component/RootLayout.tsx";
+import {CustomerProvider} from "./store/CustomerProvider.tsx";
+import {ItemProvider} from "./store/ItemProvider.tsx";
 // import {Login} from "./component/Login.tsx";
 // import {Subject} from "./component/Subject.tsx";
 // import ButtonComponent from "./component/ButtonComponent.tsx";
 // import {ChangeEvent, useState} from "react";
-import {useState} from "react";
-import {Customer} from "./models/Customer.ts";
+// import {useState} from "react";
+// import {Customer} from "./models/Customer.ts";
 // import {Item} from "./component/Item.tsx";
 // import {ItemList} from "./Items.ts";
 
 function App() {
 
-    const [customers, setCustomers] = useState<Customer[]>([]);
-
-    const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-
-    function addCustomer(){
-        const newCustomer = new Customer(name, address, email, phone);
-        setCustomers((customers) => [...customers, newCustomer]);
-    }
-
-    function deleteCustomer(){
-        setCustomers((customers) => customers.slice(0,-1))
-    }
-
-    function deleteByEmail(){
-        setCustomers((customers) => customers.filter((customer) => customer.email !== email));
-    }
-
-    function updateCustomer() {
-        setCustomers(
-            customers.map((customer) =>
-                customer.email === email
-                    ? {
-                        ...customer,
-                        name: name,
-                        address: address,
-                        email: email,
-                        phone: phone,
-                    }
-                    : customer
-            )
-        );
-    }
-
-    // function updateCustomer() {
-    //     setCustomers(
-    //         customers.map((customer) =>
-    //             customer.email === email
-    //                 ? new Customer(name, address, email, phone)
-    //                 : customer
-    //         )
-    //     );
-    // }
-
+    const routes = createBrowserRouter([
+        {
+            path: "/",
+            element: <RootLayout/>,
+            children: [
+                {path: "/", element: <Dashboard/>},
+                {path: "/add", element: <Add/>},
+                {path: "/update", element: <Update/>},
+                {path: "/delete", element: <Delete/>}
+            ]
+        },
+        {path: "*", element: <Error/>}
+    ])
 
     return (
         <>
-            <input type='text' placeholder='Name' onChange={(e) => setName(e.target.value)}/>
-            <input type='text' placeholder='Address' onChange={(e) => setAddress(e.target.value)}/>
-            <input type='text' placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
-            <input type='text' placeholder='Phone' onChange={(e) => setPhone(e.target.value)}/>
-
-            <br/>
-
-            <button onClick={addCustomer}>Add Customer</button>
-            <button onClick={deleteCustomer}>Delete Customer</button>
-            <button onClick={deleteByEmail}>Delete By Email</button>
-            <button onClick={updateCustomer}>Update Customer</button>
-            <br/>
-
-            {customers.map((customer) => (
-                <div>{customer.name + ' ' + customer.address + ' ' + customer.email + ' ' + customer.phone}</div>
-            ))}
+            <CustomerProvider>
+                <ItemProvider>
+                <RouterProvider router={routes}></RouterProvider>
+                </ItemProvider>
+            </CustomerProvider>
         </>
     )
 }
@@ -251,4 +215,72 @@ export default App
 // <button onClick={handleSubmit}>Add Values</button>
 // <br/>
 // {show && <p>Hello: {userData.firstName + ' ' + userData.lastName}</p>}
+
+//=========================================================
+
+// const [customers, setCustomers] = useState<Customer[]>([]);
+//
+// const [name, setName] = useState("");
+// const [address, setAddress] = useState("");
+// const [email, setEmail] = useState("");
+// const [phone, setPhone] = useState("");
+//
+// function addCustomer(){
+//     const newCustomer = new Customer(name, address, email, phone);
+//     setCustomers((customers) => [...customers, newCustomer]);
+// }
+//
+// function deleteCustomer(){
+//     setCustomers((customers) => customers.slice(0,-1))
+// }
+//
+// function deleteByEmail(){
+//     setCustomers((customers) => customers.filter((customer) => customer.email !== email));
+// }
+//
+// function updateCustomer() {
+//     setCustomers(
+//         customers.map((customer) =>
+//             customer.email === email
+//                 ? {
+//                     ...customer,
+//                     name: name,
+//                     address: address,
+//                     email: email,
+//                     phone: phone,
+//                 }
+//                 : customer
+//         )
+//     );
+// }
+
+{/*<input type='text' placeholder='Name' onChange={(e) => setName(e.target.value)}/>*/
+}
+{/*<input type='text' placeholder='Address' onChange={(e) => setAddress(e.target.value)}/>*/
+}
+{/*<input type='text' placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>*/
+}
+{/*<input type='text' placeholder='Phone' onChange={(e) => setPhone(e.target.value)}/>*/
+}
+
+{/*<br/>*/
+}
+
+{/*<button onClick={addCustomer}>Add Customer</button>*/
+}
+{/*<button onClick={deleteCustomer}>Delete Customer</button>*/
+}
+{/*<button onClick={deleteByEmail}>Delete By Email</button>*/
+}
+{/*<button onClick={updateCustomer}>Update Customer</button>*/
+}
+{/*<br/>*/
+}
+
+{/*{customers.map((customer) => (*/
+}
+{/*    <div>{customer.name + ' ' + customer.address + ' ' + customer.email + ' ' + customer.phone}</div>*/
+}
+{/*))}*/
+}
 
